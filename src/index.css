@@ -1,0 +1,354 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  :root {
+    --font-scale: 1;
+    --font-serif-editorial: "Fraunces", "Noto Sans Devanagari", Georgia, serif;
+    --font-sans-ui: "Plus Jakarta Sans", "Noto Sans Devanagari", system-ui, -apple-system, sans-serif;
+    --font-mono-tabular: "JetBrains Mono", ui-monospace, monospace;
+  }
+
+  html {
+    font-family: var(--font-sans-ui);
+    font-size: calc(16px * var(--font-scale));
+    scroll-behavior: smooth;
+    background-color: #EEF4F8;
+    color: #223142;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  html.dark {
+    background-color: #121820;
+    color: #EAF1F6;
+  }
+
+  .high-contrast {
+    --hc-contrast: 1.08;
+    filter: contrast(var(--hc-contrast));
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  h1,
+  h2,
+  h3,
+  .font-editorial {
+    font-family: var(--font-serif-editorial);
+    text-wrap: balance;
+  }
+
+  .font-mono-tabular {
+    font-family: var(--font-mono-tabular);
+    font-variant-numeric: tabular-nums;
+  }
+
+  *:focus-visible {
+    outline: 2px solid #3B828E;
+    outline-offset: 2px;
+  }
+
+  .dark *:focus-visible {
+    outline-color: #7CC7D4;
+  }
+}
+
+/* Apple iOS 26 Crystal-Clear Cool Frost Liquid Glass & Botanical Mist Surfaces */
+.ios-liquid-nav {
+  background: linear-gradient(
+    155deg,
+    rgba(255, 255, 255, 0.72) 0%,
+    rgba(244, 250, 253, 0.48) 55%,
+    rgba(255, 255, 255, 0.62) 100%
+  );
+  backdrop-filter: blur(24px) saturate(190%);
+  -webkit-backdrop-filter: blur(24px) saturate(190%);
+  box-shadow:
+    inset 0 1px 1.5px rgba(255, 255, 255, 0.96),
+    inset 0 -1px 4px rgba(255, 255, 255, 0.55),
+    0 12px 30px -14px rgba(59, 130, 142, 0.18);
+}
+
+.dark .ios-liquid-nav {
+  background: linear-gradient(
+    155deg,
+    rgba(28, 38, 48, 0.68) 0%,
+    rgba(18, 24, 32, 0.52) 100%
+  );
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.14),
+    inset 0 -1px 5px rgba(255, 255, 255, 0.04),
+    0 14px 34px -14px rgba(0, 0, 0, 0.65);
+}
+
+.ios-liquid-glass {
+  background: linear-gradient(
+    150deg,
+    rgba(255, 255, 255, 0.66) 0%,
+    rgba(244, 250, 254, 0.36) 52%,
+    rgba(235, 246, 250, 0.48) 100%
+  );
+  backdrop-filter: blur(22px) saturate(185%);
+  -webkit-backdrop-filter: blur(22px) saturate(185%);
+  box-shadow:
+    inset 0 1px 1.5px rgba(255, 255, 255, 0.96),
+    inset 0 -1px 5px rgba(255, 255, 255, 0.48),
+    0 14px 34px -15px rgba(59, 130, 142, 0.16);
+}
+
+/* Every Liquid Glass box gently breathes slightly (including emotion category buttons) */
+.ios-liquid-glass:not(input):not(select):not(textarea) {
+  animation: av-breathe-box 7.2s ease-in-out infinite;
+}
+
+.dark .ios-liquid-glass {
+  background: linear-gradient(
+    150deg,
+    rgba(30, 40, 50, 0.62) 0%,
+    rgba(20, 27, 36, 0.48) 100%
+  );
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.14),
+    inset 0 -1px 5px rgba(255, 255, 255, 0.04),
+    0 16px 38px -16px rgba(0, 0, 0, 0.65);
+}
+
+.dark .ios-liquid-glass:not(input):not(select):not(textarea) {
+  animation: av-breathe-box-dark 7.2s ease-in-out infinite;
+}
+
+.ios-glass-bubble {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.78) 0%,
+    rgba(242, 249, 253, 0.56) 100%
+  );
+  backdrop-filter: blur(18px) saturate(180%);
+  -webkit-backdrop-filter: blur(18px) saturate(180%);
+  box-shadow:
+    inset 0 1px 1.5px rgba(255, 255, 255, 0.92),
+    inset 0 -1px 1.5px rgba(255, 255, 255, 0.68),
+    0 8px 20px -8px rgba(59, 130, 142, 0.18);
+}
+
+.dark .ios-glass-bubble {
+  background: linear-gradient(
+    180deg,
+    rgba(36, 48, 60, 0.72) 0%,
+    rgba(22, 30, 39, 0.56) 100%
+  );
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.16),
+    inset 0 -1px 1px rgba(255, 255, 255, 0.08),
+    0 10px 24px -8px rgba(0, 0, 0, 0.6);
+}
+
+/* Mindful Inhale -> Hold -> Exhale Breathing Motion */
+@keyframes av-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  44%,
+  54% {
+    transform: scale(1.026);
+  }
+}
+
+@keyframes av-breathe-box {
+  0%,
+  100% {
+    transform: scale(1) translateY(0px);
+    box-shadow:
+      inset 0 1px 1.5px rgba(255, 255, 255, 0.96),
+      inset 0 -1px 5px rgba(255, 255, 255, 0.48),
+      0 12px 30px -15px rgba(59, 130, 142, 0.14);
+  }
+  44%,
+  54% {
+    transform: scale(1.01) translateY(-1.5px);
+    box-shadow:
+      inset 0 1.5px 2px rgba(255, 255, 255, 0.98),
+      inset 0 -1.5px 7px rgba(255, 255, 255, 0.6),
+      0 18px 40px -12px rgba(59, 130, 142, 0.22);
+  }
+}
+
+@keyframes av-breathe-box-dark {
+  0%,
+  100% {
+    transform: scale(1) translateY(0px);
+  }
+  44%,
+  54% {
+    transform: scale(1.01) translateY(-1.5px);
+  }
+}
+
+@keyframes av-breathe-bubble {
+  0%,
+  100% {
+    transform: scale(1) translateY(0px);
+  }
+  44%,
+  54% {
+    transform: scale(1.05) translateY(-1.5px);
+  }
+}
+
+@keyframes av-breathe-ring {
+  0%,
+  100% {
+    transform: scale(0.98);
+    opacity: 0.42;
+  }
+  44%,
+  54% {
+    transform: scale(1.16);
+    opacity: 0.1;
+  }
+}
+
+.animate-breathe {
+  animation: av-breathe 6.4s ease-in-out infinite;
+}
+
+.animate-breathe-box {
+  animation: av-breathe-box 7.2s ease-in-out infinite;
+}
+
+.dark .animate-breathe-box {
+  animation: av-breathe-box-dark 7.2s ease-in-out infinite;
+}
+
+.animate-breathe-bubble {
+  animation: av-breathe-bubble 6.8s ease-in-out infinite;
+}
+
+.animate-breathe-ring {
+  animation: av-breathe-ring 6.4s ease-in-out infinite;
+}
+
+.animate-breathe-glow {
+  animation: av-breathe-box 7.2s ease-in-out infinite;
+}
+
+.dark .animate-breathe-glow {
+  animation: av-breathe-box-dark 7.2s ease-in-out infinite;
+}
+
+/* Interactive Click Bubble Ripple & Section Entry Breathing */
+@keyframes av-bubble-ripple {
+  0% {
+    transform: translate(-50%, -50%) scale(0.25);
+    opacity: 0.92;
+  }
+  55% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(2.4);
+    opacity: 0;
+  }
+}
+
+@keyframes av-bubble-droplet {
+  0% {
+    transform: translate(-50%, -50%) scale(0.4);
+    opacity: 0.95;
+  }
+  100% {
+    transform: translate(-50%, -115%) scale(1.25);
+    opacity: 0;
+  }
+}
+
+@keyframes av-section-breathe-pulse {
+  0% {
+    transform: scale(0.996);
+  }
+  50% {
+    transform: scale(1.004);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.av-bubble-ripple {
+  animation: av-bubble-ripple 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.av-bubble-droplet {
+  animation: av-bubble-droplet 0.72s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+main section {
+  contain: layout style;
+}
+
+main section:hover,
+main section:focus-within {
+  animation: av-section-breathe-pulse 5.2s ease-in-out infinite;
+}
+
+/* Global Mindful Breathing Animation on Every Clickable Option Across AVheard (GPU-composited) */
+@keyframes av-breathe-click {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  44%,
+  54% {
+    transform: scale(1.028);
+  }
+}
+
+button:not(:disabled):not(.sr-only):not(.animate-breathe):not(.animate-breathe-box):not(.animate-breathe-bubble):not(.animate-breathe-glow):not(:hover):not(:active),
+[role="tab"]:not([aria-disabled="true"]):not(:hover):not(:active),
+[role="button"]:not([aria-disabled="true"]):not(.animate-breathe):not(.animate-breathe-box):not(:hover):not(:active),
+select:not(:disabled):not(:hover):not(:focus),
+summary:not(:hover),
+a[href]:not(.sr-only):not(.animate-breathe):not(.animate-breathe-box):not(.animate-breathe-bubble):not(:hover):not(:active),
+label:has(input[type="file"]):not(:hover),
+label:has(input[type="checkbox"]):not(:hover),
+label:has(input[type="radio"]):not(:hover) {
+  animation: av-breathe-click 6.4s ease-in-out infinite;
+  transform-origin: center;
+}
+
+button:nth-of-type(2n),
+a[href]:nth-of-type(2n),
+[role="tab"]:nth-of-type(2n) {
+  animation-delay: 0.45s;
+}
+
+button:nth-of-type(3n),
+a[href]:nth-of-type(3n),
+[role="tab"]:nth-of-type(3n) {
+  animation-delay: 0.9s;
+}
+
+button:nth-of-type(4n),
+a[href]:nth-of-type(4n),
+[role="tab"]:nth-of-type(4n) {
+  animation-delay: 1.35s;
+}
+
+button:nth-of-type(5n),
+a[href]:nth-of-type(5n) {
+  animation-delay: 1.8s;
+}
